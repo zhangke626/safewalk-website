@@ -1,0 +1,67 @@
+<!-- technical.html -->
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Technical Highlights - SafeWalk</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
+  <div id="wrapper">
+    <div id="main">
+      <div class="inner">
+        <header id="header">
+          <a href="index.html" class="logo"><strong>SafeWalk</strong></a>
+        </header>
+
+        <section>
+          <header class="main">
+            <h1>Technical Highlights</h1>
+          </header>
+
+          <ul>
+            <li>Object detection powered by <strong>YOLOv5s</strong>, fine-tuned on 28 object classes including cane, scooter, bollard, stairs, etc.</li>
+            <li>Training dataset: ~15GB, 91,000+ files. Final model metrics: <strong>Precision 0.63</strong>, <strong>Recall 0.51</strong>, <strong>mAP@0.5: 0.51</strong>.</li>
+            <li>Key challenges solved: class imbalance (handled via augmentation and undersampling), catastrophic forgetting (solved via replay-based learning).</li>
+            <li>Scene understanding and narration via <strong>Qwen2 Visual Language Model</strong>. Compared to Paligemma, Qwen2 provided richer descriptions and performed up to 67% better in navigation-relevant categories like spatial orientation and environmental awareness.</li>
+            <li>YOLOv5s chosen over Faster-RCNN for deployment efficiency, latency, and compatibility with mobile environments.</li>
+          </ul>
+
+          <p>Models were optimized for mobile deployment, with future extensibility to smart glasses or cane-mounted camera platforms. Real-time latency was a key driver of architecture and model selection.</p>
+
+          <p><a href="https://github.com/YOUR_REPO_HERE" class="button primary small">View Project on GitHub</a></p>
+        </section>
+      </div>
+    </div>
+
+    <div id="sidebar">
+      <div class="inner">
+        <nav id="menu">
+          <header class="major">
+            <h2>Menu</h2>
+          </header>
+          <ul>
+            <li><a href="index.html">Homepage</a></li>
+            <li><a href="about.html">About / Problem</a></li>
+            <li><a href="technical.html">Technical Highlights</a></li>
+          </ul>
+        </nav>
+        <section>
+          <header class="major">
+            <h2>Contact</h2>
+          </header>
+          <ul class="contact">
+            <li class="icon solid fa-envelope"><a href="mailto:feiquanliyu@gmail.com">feiquanliyu@gmail.com</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
