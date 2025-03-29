@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Modeling & Evaluation - SafeWalk</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
+  <div id="wrapper">
+    <div id="main">
+      <div class="inner">
+        <header id="header">
+          <a href="index.html" class="logo"><strong>SafeWalk</strong></a>
+        </header>
+
+        <section>
+          <header class="main">
+            <h1>Modeling & Evaluation</h1>
+          </header>
+
+          <h2>Model Exploration</h2>
+          <ul>
+            <li><strong>YOLOv5s:</strong> Selected for real-time speed and mobile compatibility</li>
+            <li><strong>YOLOv11s:</strong> Higher accuracy but increased inference time</li>
+            <li><strong>Faster-RCNN:</strong> Explored but rejected due to long training time and poor mobile support</li>
+          </ul>
+
+          <h2>Final Model Performance</h2>
+          <ul>
+            <li><strong>Precision:</strong> 0.63</li>
+            <li><strong>Recall:</strong> 0.51</li>
+            <li><strong>mAP@0.5:</strong> 0.51</li>
+            <li><strong>Latency:</strong> Optimized for on-device detection</li>
+          </ul>
+
+          <h2>Visual Language Model (VLM)</h2>
+          <ul>
+            <li><strong>Model:</strong> Qwen2 selected over Paligemma for richer descriptions</li>
+            <li><strong>Qwen2 vs Paligemma:</strong> +1.7 points in spatial orientation and environmental awareness</li>
+            <li>Qwen2 averaged 65–70 words per description vs 11–12 with Paligemma</li>
+          </ul>
+
+          <h2>Model Evaluation & Metrics</h2>
+          <ul>
+            <li>Tracked metrics: Precision, Recall, mAP@0.5, mAP@0.5:0.95</li>
+            <li>Reviewed class-level confusion matrices to address edge-case failure</li>
+            <li>Latency testing on Android and iOS for alert responsiveness</li>
+          </ul>
+
+          <h2>Key Technical Challenges</h2>
+          <ol>
+            <li>Imbalanced training data across 28 custom object classes</li>
+            <li>Meeting latency requirements for mobile while preserving accuracy</li>
+            <li>Integrating on-device and cloud-based components in one UX</li>
+          </ol>
+
+          <h2>Future Roadmap</h2>
+          <ul>
+            <li>Deploy to smart glasses or smart cane systems</li>
+            <li>Refine voice alert logic through user testing</li>
+            <li>Improve multilingual support for international users</li>
+          </ul>
+
+          <p><a href="https://github.com/YOUR_REPO_HERE" class="button primary small">View Project on GitHub</a></p>
+        </section>
+      </div>
+    </div>
+
+    <div id="sidebar">
+      <div class="inner">
+        <nav id="menu">
+          <header class="major">
+            <h2>Menu</h2>
+          </header>
+          <ul>
+            <li><a href="index.html">Homepage</a></li>
+            <li><a href="about.html">About / Problem</a></li>
+            <li><a href="data.html">Data</a></li>
+            <li><a href="model.html">Model</a></li>
+            <li><a href="architecture.html">Architecture</a></li>
+            <li><a href="demo.html">Demo</a></li>
+          </ul>
+        </nav>
+        <section>
+          <header class="major">
+            <h2>Contact</h2>
+          </header>
+          <ul class="contact">
+            <li class="icon solid fa-envelope"><a href="mailto:2ez4kez@berkeley.edu">2ez4kez@berkeley.edu</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

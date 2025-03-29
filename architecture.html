@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Architecture - SafeWalk</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
+  <div id="wrapper">
+    <div id="main">
+      <div class="inner">
+        <header id="header">
+          <a href="index.html" class="logo"><strong>SafeWalk</strong></a>
+        </header>
+
+        <section>
+          <header class="main">
+            <h1>Architecture & Pipeline</h1>
+          </header>
+
+          <h2>Pipeline Overview</h2>
+          <p>The SafeWalk pipeline consists of five major components:</p>
+          <ol>
+            <li><strong>Data Collection:</strong> Images from public datasets and real-world captures with new and existing object classes.</li>
+            <li><strong>Preprocessing:</strong> Label validation, data augmentation, Roboflow management.</li>
+            <li><strong>Model Training:</strong> YOLOv5s model fine-tuning with 80/10/10 split for training, validation, and testing.</li>
+            <li><strong>Deployment:</strong> Optimized model exported to ONNX/TFLite for on-device inference.</li>
+            <li><strong>User Feedback Loop:</strong> Targeted retraining and fine-tuning based on app usage and feedback.</li>
+          </ol>
+          <img src="images/unnamed (1).png" alt="Dual Model Data Flow" style="max-width: 100%; margin: 1.5em 0; border-radius: 8px;" />
+
+          <h2>Detailed Architecture</h2>
+          <p>Our architecture integrates both object detection and natural language processing capabilities to provide real-time, multimodal interaction. Key elements include:</p>
+          <ul>
+            <li><strong>Cloud Components:</strong> A pre-trained Visual Language Model (VLM) is hosted on AWS SageMaker with a real-time inference endpoint. AWS Lambda functions and API Gateway manage mobile communication through POST requests with base64-encoded images.</li>
+            <li><strong>Error Handling:</strong> Includes automatic retry logic, input validation, and detailed logging to ensure reliability.</li>
+            <li><strong>Prompt Engineering:</strong> Customized prompts tailored for visually impaired navigation to control verbosity and relevance of the response.</li>
+            <li><strong>Training Infrastructure:</strong> Datasets stored in AWS S3 and used for YOLO model fine-tuning. The trained model is converted to Core ML (.mlmodel) for iOS deployment and TorchScript for Android testing.</li>
+            <li><strong>On-device Processing:</strong> The mobile app integrates the YOLO model for low-latency detection and an alert engine for real-time feedback. The VLM component runs in the cloud for heavier processing.</li>
+          </ul>
+          <p>This hybrid architecture balances cloud and on-device workloads for maximum efficiency and real-time performance.</p>
+          <img src="images/unnamed.png" alt="ML Pipeline Architecture" style="max-width: 100%; margin: 1.5em 0; border-radius: 8px;" />
+
+        </section>
+      </div>
+    </div>
+
+    <div id="sidebar">
+      <div class="inner">
+        <nav id="menu">
+          <header class="major">
+            <h2>Menu</h2>
+          </header>
+          <ul>
+            <li><a href="index.html">Homepage</a></li>
+            <li><a href="about.html">About / Problem</a></li>
+            <li><a href="data.html">Data</a></li>
+            <li><a href="model.html">Model</a></li>
+            <li><a href="architecture.html">Architecture</a></li>
+            <li><a href="demo.html">Demo</a></li>
+          </ul>
+        </nav>
+        <section>
+          <header class="major">
+            <h2>Contact</h2>
+          </header>
+          <ul class="contact">
+            <li class="icon solid fa-envelope"><a href="mailto:2ez4kez@berkeley.edu">2ez4kez@berkeley.edu</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

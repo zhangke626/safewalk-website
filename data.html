@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Data & Preprocessing - SafeWalk</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
+  <div id="wrapper">
+    <div id="main">
+      <div class="inner">
+        <header id="header">
+          <a href="index.html" class="logo"><strong>SafeWalk</strong></a>
+        </header>
+
+        <section>
+          <header class="main">
+            <h1>Data & Preprocessing</h1>
+          </header>
+
+          <p>Our data pipeline powers SafeWalk's ability to understand and react to complex urban environments in real-time.</p>
+
+          <h2>Dataset Summary</h2>
+          <ul>
+            <li>Volume: ~15GB total, over 91,000 images</li>
+            <li>Classes: 28 custom object classes including pothole, scooter, stairs, tree, fire hydrant, etc.</li>
+            <li>Sources: Public datasets, web scraping, real-world photos</li>
+          </ul>
+
+          <h2>Preprocessing Workflow</h2>
+          <ul>
+            <li>Labeled with Roboflow and manually verified</li>
+            <li>Data augmentation for minority classes (rotation, flipping, brightness adjustment)</li>
+            <li>Undersampling of dominant classes (e.g., person) to balance dataset</li>
+            <li>Split: 80% train, 10% validation, 10% test</li>
+          </ul>
+
+          <h2>Handling Class Imbalance</h2>
+          <ul>
+            <li>Used <strong>image-weights</strong> in loss function to emphasize underperforming classes</li>
+            <li>Custom learning rate scheduling to prevent overfitting on dominant classes</li>
+          </ul>
+
+          <h2>Replay-Based Learning</h2>
+          <p>To prevent <strong>catastrophic forgetting</strong> when introducing new object classes, we implemented replay-based learning. This technique retains original class accuracy while adding new categories efficiently.</p>
+
+          <h2>Data Challenges</h2>
+          <ul>
+            <li>Mislabeling and noise in public datasets</li>
+            <li>Minority classes like potholes were hard to collect and label</li>
+            <li>Needed to maintain quality while scaling dataset size</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <div id="sidebar">
+      <div class="inner">
+        <nav id="menu">
+          <header class="major">
+            <h2>Menu</h2>
+          </header>
+          <ul>
+            <li><a href="index.html">Homepage</a></li>
+            <li><a href="about.html">About / Problem</a></li>
+            <li><a href="data.html">Data</a></li>
+            <li><a href="model.html">Model</a></li>
+            <li><a href="architecture.html">Architecture</a></li>
+            <li><a href="demo.html">Demo</a></li>
+          </ul>
+        </nav>
+        <section>
+          <header class="major">
+            <h2>Contact</h2>
+          </header>
+          <ul class="contact">
+            <li class="icon solid fa-envelope"><a href="mailto:2ez4kez@berkeley.edu">2ez4kez@berkeley.edu</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
