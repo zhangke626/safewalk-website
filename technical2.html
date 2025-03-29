@@ -1,0 +1,104 @@
+<!-- technical.html -->
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Technical Highlights - SafeWalk</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
+  <div id="wrapper">
+    <div id="main">
+      <div class="inner">
+        <header id="header">
+          <a href="index.html" class="logo"><strong>SafeWalk</strong></a>
+        </header>
+
+        <section>
+          <header class="main">
+            <h1>Technical Highlights</h1>
+          </header>
+
+          <h2>Overview</h2>
+          <p>SafeWalk leverages computer vision and large language models to support visually impaired individuals in real-time navigation. The app combines a custom-trained object detection model and a visual language model to deliver obstacle detection, voice alerts, and rich scene descriptions.</p>
+
+          <h2>Data & Modeling Approach</h2>
+          <ul>
+            <li>Training dataset: ~15GB, 91,000+ files, 28 object classes (e.g., potholes, scooters, bollards, stairs, etc.)</li>
+            <li>Preprocessing with Roboflow, manual validation to avoid poor labeling</li>
+            <li>Addressed class imbalance using data augmentation and undersampling</li>
+            <li>Replay-based learning used to mitigate catastrophic forgetting during transfer learning</li>
+          </ul>
+
+          <h2>Model Selection</h2>
+          <p>We evaluated Faster-RCNN and two YOLO variants (v5s and v11s). YOLOv5s was selected due to:</p>
+          <ul>
+            <li>Lower training time and cost (20 min per epoch vs. 3.5 hrs for Faster-RCNN)</li>
+            <li>Higher deployment efficiency on mobile devices (supports TFLite, CoreML, ONNX)</li>
+            <li>Balanced performance: <strong>Precision 0.63</strong>, <strong>Recall 0.51</strong>, <strong>mAP@0.5: 0.51</strong></li>
+          </ul>
+
+          <h2>Visual Language Model (VLM)</h2>
+          <ul>
+            <li>Compared Paligemma and Qwen2; Qwen2 outperformed with longer, more detailed scene descriptions</li>
+            <li>Key metric improvements: +1.7 in Spatial Orientation, +1.7 in Environmental Awareness</li>
+            <li>Descriptions averaged 65–70 words (vs. 11–12 in Paligemma)</li>
+          </ul>
+
+          <h2>Evaluation & Metrics</h2>
+          <ul>
+            <li>Metrics tracked: Precision, Recall, mAP@0.5, mAP@0.5:0.95, latency</li>
+            <li>Confusion matrix revealed class-level accuracy gaps due to data imbalance</li>
+            <li>Latency optimized for real-time alerts on smartphones</li>
+          </ul>
+
+          <h2>Key Technical Challenges</h2>
+          <ol>
+            <li>Managing 28 object classes with imbalanced training data</li>
+            <li>Ensuring real-time latency with limited compute power on mobile devices</li>
+            <li>Maintaining model accuracy while extending class variety</li>
+          </ol>
+
+          <h2>Future Roadmap</h2>
+          <ul>
+            <li>Integrate with smart glasses and canes for hands-free experience</li>
+            <li>Refine alert rule engine with user feedback</li>
+            <li>Expand multi-language and accessibility support</li>
+          </ul>
+
+          <p><a href="https://github.com/YOUR_REPO_HERE" class="button primary small">View Project on GitHub</a></p>
+        </section>
+      </div>
+    </div>
+
+    <div id="sidebar">
+      <div class="inner">
+        <nav id="menu">
+          <header class="major">
+            <h2>Menu</h2>
+          </header>
+          <ul>
+            <li><a href="index.html">Homepage</a></li>
+            <li><a href="about.html">About / Problem</a></li>
+            <li><a href="technical.html">Technical Highlights</a></li>
+          </ul>
+        </nav>
+        <section>
+          <header class="major">
+            <h2>Contact</h2>
+          </header>
+          <ul class="contact">
+            <li class="icon solid fa-envelope"><a href="mailto:feiquanliyu@gmail.com">feiquanliyu@gmail.com</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
