@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>YOLOv5s - Obstacle Detection</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    .highlight-box {
+      background-color: #f8f8f8;
+      border-left: 6px solid #005c99;
+      padding: 1.2em 1.5em;
+      border-radius: 8px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.06);
+      margin-bottom: 2em;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    p.caption {
+      font-style: italic;
+      text-align: center;
+      margin-top: 0.5em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5em;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75em;
+      text-align: center;
+    }
+    th {
+      background-color: #005c99;
+      color: white;
+    }
+  </style>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+  <div id="main">
+    <div class="inner">
+      <header id="header">
+        <a href="index.html" class="logo"><strong>SafeWalk</strong></a>
+      </header>
+
+      <section>
+        <header class="main">
+          <h1>YOLOv5s: Obstacle Detection Model</h1>
+        </header>
+
+        <p>We selected and fine-tuned <strong>YOLOv5s</strong> as our base for object detection due to its lightweight structure, fast inference speed, and strong performance. This model enables real-time obstacle detection on mobile devices.</p>
+
+        <div class="highlight-box">
+          <h3>Model Comparison & Final Performance</h3>
+          <table>
+            <tr>
+              <th>Model</th>
+              <th>Precision</th>
+              <th>Recall</th>
+              <th>F1 Score</th>
+              <th>mAP@0.5</th>
+              <th>mAP@0.5:0.95</th>
+            </tr>
+            <tr>
+              <td>YOLOv5 (Base)</td>
+              <td>0.65</td>
+              <td>0.48</td>
+              <td>0.54</td>
+              <td>0.52</td>
+              <td>0.31</td>
+            </tr>
+            <tr>
+              <td>YOLOv11 (Small)</td>
+              <td>0.66</td>
+              <td>0.53</td>
+              <td>0.56</td>
+              <td>0.56</td>
+              <td>0.37</td>
+            </tr>
+            <tr>
+              <td><strong>YOLOv5s (Fine-Tuned)</strong></td>
+              <td><strong>0.82</strong></td>
+              <td><strong>0.67</strong></td>
+              <td><strong>0.73</strong></td>
+              <td><strong>0.76</strong></td>
+              <td><strong>0.54</strong></td>
+            </tr>
+          </table>
+          <p><strong>Deployment:</strong> Optimized using TorchScript for Android compatibility</p>
+        </div>
+
+        <h2>Fine-Tuning Strategy</h2>
+        <ul>
+          <li>Changed optimizer from <strong>SGD</strong> to <strong>Adam</strong></li>
+          <li>Lowered learning rate from <strong>0.01</strong> to <strong>0.001</strong></li>
+          <li>Increased training epochs to <strong>100</strong></li>
+          <li>Implemented <strong>label smoothing</strong> with value <strong>0.1</strong></li>
+          <li>Used <strong>class-specific thresholds</strong> (e.g., Car: 0.35, Bollard: 0.50)</li>
+          <li>Addressed class imbalance with <strong>undersampling</strong> and <strong>augmented oversampling</strong></li>
+          <li>Incorporated <strong>class weights</strong> for rare classes</li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 1.5em;">
+          <img src="images/pr_curve.png" alt="PR Curve for fine-tuned YOLOv5s" />
+          <p class="caption">PR Curve showing improvements post fine-tuning</p>
+        </div>
+
+        <h2>Smart Alert System</h2>
+        <p>Our adaptive alert engine uses YOLO outputs to trigger spoken warnings based on real-time detection and object location. This system aims to enhance safety while minimizing alert fatigue.</p>
+        <ul>
+          <li>Alerts only trigger in critical moments</li>
+          <li>Direction-specific cues: e.g., “<em>Bicycle on your right</em>” or “<em>Obstacle in front</em>”</li>
+          <li>Bounding box parameters (center width, top, height) are used for decision-making</li>
+          <li>Class-based logic tailored for objects of varying sizes like trees, people, or bollards</li>
+        </ul>
+
+        <div style="text-align: center;">
+          <img src="images/alert_rules.jpg" alt="Alert rule bounding box logic" />
+          <p class="caption">Class-specific bounding box logic enables contextual and directional alerts</p>
+        </div>
+
+        <h2>Key Challenges & Learnings</h2>
+        <p>Developing consistent alerting rules for object classes with drastically different shapes and sizes—such as wide cars vs. narrow bollards—required extensive testing and adjustments.</p>
+        <p>We used a custom test mode to evaluate how bounding boxes behaved across real-world conditions and tuned logic accordingly.</p>
+        
+        <div style="text-align: center; margin-bottom: 2em;">
+          <img src="images/bounding_box_demo.png" alt="Bounding box testing mode example" />
+          <p class="caption">Bounding box parameters like center width and height helped us differentiate class-based behaviors</p>
+        </div>
+        
+        <div style="text-align: center;">
+          <img src="images/test_mode.png" alt="Test mode showing bounding box parameter evaluation" />
+          <p class="caption">Test mode enabled thorough examination of alert rules under diverse conditions and distances</p>
+        </div>
+        
+      </section>
+    </div>
+  </div>
+
+  <div id="sidebar">
+    <div class="inner">
+      <nav id="menu">
+        <header class="major">
+          <h2>Menu</h2>
+        </header>
+        <ul>
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="about.html">About / Problem</a></li>
+          <li><a href="data.html">Data</a></li>
+          <li>
+            <span class="opener">Model</span>
+            <ul>
+              <li><a href="model_yolo.html">YOLOv5s (Detection)</a></li>
+              <li><a href="model_qwen2.html">Qwen2 (Description)</a></li>
+            </ul>
+          </li>
+          <li><a href="architecture.html">Architecture</a></li>
+          <li><a href="demo.html">Demo</a></li>
+          <li><a href="team.html">Team</a></li>
+        </ul>
+      </nav>
+      <section>
+        <header class="major">
+          <h2>Contact</h2>
+        </header>
+        <ul class="contact">
+          <li class="icon solid fa-envelope"><a href="mailto:2ez4kez@berkeley.edu">2ez4kez@berkeley.edu</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

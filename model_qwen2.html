@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Qwen2 - Scene Description</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    .highlight-box {
+      background-color: #f8f8f8;
+      border-left: 6px solid #005c99;
+      padding: 1.2em 1.5em;
+      border-radius: 8px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.06);
+      margin-bottom: 2em;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    p.caption {
+      font-style: italic;
+      text-align: center;
+      margin-top: 0.5em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5em;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75em;
+      text-align: center;
+    }
+    th {
+  background-color: #e6f2ff; 
+  color: #003366;           
+  text-align: center;       
+}
+
+
+  </style>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+  <div id="main">
+    <div class="inner">
+      <header id="header">
+        <a href="index.html" class="logo"><strong>SafeWalk</strong></a>
+      </header>
+
+      <section>
+        <header class="main">
+          <h1>Qwen2: Scene Description Model</h1>
+        </header>
+
+        <p>To provide clear and context-rich visual descriptions, we evaluated several Visual Language Models (VLMs). <strong>Qwen2</strong> consistently outperformed <strong>Paligemma</strong> in both qualitative and quantitative metrics.</p>
+
+        <h2>Overall Evaluation Summary</h2>
+        <p>We scored models on three custom designed metrics across 30 real-world urban scenes:</p>
+        <ul>
+          <li><strong>Navigation Safety:</strong> Identifying obstacles, hazards, and safe paths</li>
+          <li><strong>Spatial Orientation:</strong> Helping users build a mental map</li>
+          <li><strong>Environmental Awareness:</strong> Providing relevant context (e.g., weather, time, ambiance)</li>
+        </ul>
+
+        <h3>Overall Evaluation Scores</h3>
+        <table>
+          <tr>
+            <th>Model</th>
+            <th>Navigation Safety</th>
+            <th>Spatial Orientation</th>
+            <th>Environmental Awareness</th>
+            <th>Overall</th>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+            <td>Paligemma</td>
+            <td>3.0</td>
+            <td>2.1</td>
+            <td>2.2</td>
+            <td>2.4</td>
+          </tr>
+          <tr>
+            <td>Qwen2</td>
+            <td>3.9</td>
+            <td>3.8</td>
+            <td>3.9</td>
+            <td>3.9</td>
+          </tr>
+          <tr>
+            <td><strong>Gap</strong></td>
+            <td>+0.9</td>
+            <td>+1.7</td>
+            <td>+1.7</td>
+            <td>+1.4</td>
+          </tr>
+        </table>
+
+        <div class="highlight-box">
+          <h3>Why Qwen2?</h3>
+          <ul>
+            <li><strong>67% better</strong> performance across all evaluation metrics</li>
+            <li><strong>4–6x more detailed descriptions</strong> (avg. 65–70 words vs. 11–12)</li>
+            <li>Higher accuracy in describing surroundings, layout, and spatial cues</li>
+          </ul>
+        </div>
+
+        <h2>Scene Example: Which Model Describes Better?</h2>
+        <p>We prompted both models with the same question for the picture shown:</p>
+        <div class="highlight-box">
+          <strong>Q:</strong> Please describe what is in front of me
+        </div>
+
+        <div style="text-align: left; margin-top: 2em;">
+          <img src="images/vlm_example.png" alt="Example comparison between Qwen2 and Paligemma" />
+        </div>
+
+        <div style="display: flex; flex-direction: row; gap: 2em; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 280px;">
+            <h4>Paligemma’s Response</h4>
+            <p><em>“The image is a video of a crosswalk with a person and a car in the middle of the road.”</em></p>
+          </div>
+          <div style="flex: 1; min-width: 280px;">
+            <h4>Qwen2’s Response</h4>
+            <p><em>“The image shows a city street scene during the day time. There are several people crossing the street at the pedestrian crossing marked with yellow line. The street is relatively wide and has a few cars parked along the side. There are trees with blooming flowers likely cherry blossoms…”</em></p>
+          </div>
+        </div>
+
+        <h3>Scoring Comparison</h3>
+        <table>
+          <tr>
+            <th>Metric</th>
+            <th>Paligemma</th>
+            <th>Explanation</th>
+            <th>Qwen2</th>
+            <th>Explanation</th>
+          </tr>
+          <tr>
+            <td><strong>Navigation Safety</strong></td>
+            <td>2.5</td>
+            <td>- Mentions person & car<br>- No crosswalk or signals<br>- Vague on safety context</td>
+            <td>3.0</td>
+            <td>- Notes pedestrian crossing<br>- Mentions people walking<br>- No traffic signal info</td>
+          </tr>
+          <tr>
+            <td><strong>Spatial Orientation</strong></td>
+            <td>1.0</td>
+            <td>- Only says “crosswalk”<br>- No layout or direction<br>- No reference points</td>
+            <td>4.0</td>
+            <td>- Describes street & parked cars<br>- Mentions crosswalk & layout<br>- Good scene structure</td>
+          </tr>
+          <tr>
+            <td><strong>Environmental Awareness</strong></td>
+            <td>1.0</td>
+            <td>- No weather/time info<br>- No surroundings<br>- Just car & person</td>
+            <td>3.8</td>
+            <td>- Mentions trees & cherry blossoms<br>- Notes daytime setting<br>- Adds calm ambiance</td>
+          </tr>
+          <tr>
+            <td><strong>Overall</strong></td>
+            <td>1.5</td>
+            <td>- Object-level only<br>- Missing context<br>- Not helpful for navigation</td>
+            <td>3.6</td>
+            <td>- Balanced description<br>- Good spatial & environmental cues<br>- Supports user needs</td>
+          </tr>
+        </table>
+
+
+
+        <h2>Metrics-Based Caption Evaluation</h2>
+        <p>We also evaluated the generated descriptions using NLP similarity metrics between model captions and human-written ones, Qwen2 also has higher scores across:</p>
+        <div style="text-align: center;">
+          <img src="images/vlm_caption_metrics.png" alt="Caption similarity metrics (ROUGE, METEOR)" />
+          <p class="caption">Qwen2 outperforms in ROUGE and METEOR, showing more overlap and fluency with human references</p>
+        </div>
+
+      </section>
+    </div>
+  </div>
+
+  <div id="sidebar">
+    <div class="inner">
+      <nav id="menu">
+        <header class="major">
+          <h2>Menu</h2>
+        </header>
+        <ul>
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="about.html">About / Problem</a></li>
+          <li><a href="data.html">Data</a></li>
+          <li>
+            <span class="opener">Model</span>
+            <ul>
+              <li><a href="model_yolo.html">YOLOv5s (Detection)</a></li>
+              <li><a href="model_qwen2.html">Qwen2 (Description)</a></li>
+            </ul>
+          </li>
+          <li><a href="architecture.html">Architecture</a></li>
+          <li><a href="demo.html">Demo</a></li>
+          <li><a href="team.html">Team</a></li>
+        </ul>
+      </nav>
+      <section>
+        <header class="major">
+          <h2>Contact</h2>
+        </header>
+        <ul class="contact">
+          <li class="icon solid fa-envelope"><a href="mailto:2ez4kez@berkeley.edu">2ez4kez@berkeley.edu</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

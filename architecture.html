@@ -5,6 +5,29 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    p.caption {
+      font-style: italic;
+      text-align: center;
+      margin-top: 0.5em;
+    }
+    .highlight-box {
+      background-color: #f8f8f8;
+      border-left: 6px solid #005c99;
+      padding: 1.2em 1.5em;
+      border-radius: 8px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.06);
+      margin-bottom: 2em;
+    }
+    h2 {
+      margin-top: 2em;
+    }
+  </style>
 </head>
 <body class="is-preload">
   <div id="wrapper">
@@ -16,32 +39,48 @@
 
         <section>
           <header class="main">
-            <h1>Architecture & Pipeline</h1>
+            <h1>System Architecture</h1>
           </header>
 
-          <h2>Pipeline Overview</h2>
-          <p>The SafeWalk pipeline consists of five major components:</p>
-          <ol>
-            <li><strong>Data Collection:</strong> Images from public datasets and real-world captures with new and existing object classes.</li>
-            <li><strong>Preprocessing:</strong> Label validation, data augmentation, Roboflow management.</li>
-            <li><strong>Model Training:</strong> YOLOv5s model fine-tuning with 80/10/10 split for training, validation, and testing.</li>
-            <li><strong>Deployment:</strong> Optimized model exported to ONNX/TFLite for on-device inference.</li>
-            <li><strong>User Feedback Loop:</strong> Targeted retraining and fine-tuning based on app usage and feedback.</li>
-          </ol>
-          <img src="images/unnamed (1).png" alt="Dual Model Data Flow" style="max-width: 100%; margin: 1.5em 0; border-radius: 8px;" />
+          <p>SafeWalk integrates mobile, vision, and language AI technologies into a seamless system that assists visually impaired individuals in real-time. Below is a breakdown of our core components.</p>
 
-          <h2>Detailed Architecture</h2>
-          <p>Our architecture integrates both object detection and natural language processing capabilities to provide real-time, multimodal interaction. Key elements include:</p>
+          <div style="text-align: center; margin: 2em 0;">
+            <img src="images/architecture_diagram.png" alt="SafeWalk System Architecture Diagram" />
+            <p class="caption">Architecture overview: Front-end app orchestrates detection and description flows</p>
+          </div>
+
+          <h2>1. Mobile Front-End</h2>
           <ul>
-            <li><strong>Cloud Components:</strong> A pre-trained Visual Language Model (VLM) is hosted on AWS SageMaker with a real-time inference endpoint. AWS Lambda functions and API Gateway manage mobile communication through POST requests with base64-encoded images.</li>
-            <li><strong>Error Handling:</strong> Includes automatic retry logic, input validation, and detailed logging to ensure reliability.</li>
-            <li><strong>Prompt Engineering:</strong> Customized prompts tailored for visually impaired navigation to control verbosity and relevance of the response.</li>
-            <li><strong>Training Infrastructure:</strong> Datasets stored in AWS S3 and used for YOLO model fine-tuning. The trained model is converted to Core ML (.mlmodel) for iOS deployment and TorchScript for Android testing.</li>
-            <li><strong>On-device Processing:</strong> The mobile app integrates the YOLO model for low-latency detection and an alert engine for real-time feedback. The VLM component runs in the cloud for heavier processing.</li>
+            <li>Developed in <strong>Flutter</strong> for cross-platform capability</li>
+            <li>Real-time video feed with overlayed obstacle detection results</li>
+            <li>Voice-based interaction and feedback with gesture control</li>
+            <li>Front/back camera toggle + fast alert trigger system</li>
           </ul>
-          <p>This hybrid architecture balances cloud and on-device workloads for maximum efficiency and real-time performance.</p>
-          <img src="images/unnamed.png" alt="ML Pipeline Architecture" style="max-width: 100%; margin: 1.5em 0; border-radius: 8px;" />
 
+          <h2>2. YOLOv5s Obstacle Detection</h2>
+          <ul>
+            <li>Trained on 90,855 labeled images across 28 object classes</li>
+            <li>Converted to <strong>TorchScript</strong> for on-device performance</li>
+            <li>Detects and classifies objects with bounding boxes</li>
+            <li>Provides spatial inputs for the voice alert logic</li>
+          </ul>
+
+          <h2>3. Qwen2 Visual Language Model (VLM)</h2>
+          <ul>
+            <li>Cloud-hosted using <strong>AWS SageMaker + Lambda</strong></li>
+            <li>Receives cropped image input and returns natural language captions</li>
+            <li>Optimized prompt engineering for environmental awareness</li>
+            <li>Audio output is synthesized using TTS for user-friendly feedback</li>
+          </ul>
+
+          <div class="highlight-box">
+            <h3>Deployment Strategy</h3>
+            <ul>
+              <li><strong>YOLOv5s:</strong> Runs on-device via TorchScript for low-latency and offline use</li>
+              <li><strong>Qwen2:</strong> Accessed via secure REST API for scalable and language-rich output</li>
+              <li>Designed for modular expansion: wearable camera support, iOS app, etc.</li>
+            </ul>
+          </div>
         </section>
       </div>
     </div>
@@ -56,9 +95,16 @@
             <li><a href="index.html">Homepage</a></li>
             <li><a href="about.html">About / Problem</a></li>
             <li><a href="data.html">Data</a></li>
-            <li><a href="model.html">Model</a></li>
+            <li>
+              <span class="opener">Model</span>
+              <ul>
+                <li><a href="model_yolo.html">YOLOv5s (Detection)</a></li>
+                <li><a href="model_qwen2.html">Qwen2 (Description)</a></li>
+              </ul>
+            </li>
             <li><a href="architecture.html">Architecture</a></li>
             <li><a href="demo.html">Demo</a></li>
+            <li><a href="team.html">Team</a></li>
           </ul>
         </nav>
         <section>
@@ -72,6 +118,7 @@
       </div>
     </div>
   </div>
+
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/browser.min.js"></script>
   <script src="assets/js/breakpoints.min.js"></script>

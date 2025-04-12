@@ -5,6 +5,40 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    .content-block {
+      margin-bottom: 2.5em;
+    }
+    .flex-row {
+      display: flex;
+      gap: 2em;
+      flex-wrap: wrap;
+    }
+    .flex-row > div {
+      flex: 1;
+      min-width: 250px;
+    }
+    .highlight-box {
+      background-color: #f8f8f8;
+      border-left: 6px solid #005c99;
+      padding: 1.2em 1.5em;
+      border-radius: 8px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.06);
+    }
+    h2 {
+      margin-top: 2em;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    p.caption {
+      font-style: italic;
+      text-align: center;
+      margin-top: 0.5em;
+    }
+  </style>
 </head>
 <body class="is-preload">
   <div id="wrapper">
@@ -19,39 +53,126 @@
             <h1>Data & Preprocessing</h1>
           </header>
 
-          <p>Our data pipeline powers SafeWalk's ability to understand and react to complex urban environments in real-time.</p>
+          <div class="content-block">
+            <h2>Dataset Overview</h2>
+            <div class="flex-row">
+              <div>
+                <ul>
+                  <li><strong>Volume:</strong> ~15GB total, over 90,000 labeled images</li>
+                  <li><strong>Sources:</strong> COCO dataset, real-world photos, web scraping</li>
+                  <li><strong>Labeling Tools:</strong> Roboflow + manual QA</li>
+                </ul>
+              </div>
+              <div>
+                <img src="images/coco.png" alt="COCO dataset overview" />
+                <p class="caption">COCO dataset and public image sources</p>
+              </div>
+            </div>
+          </div>
 
-          <h2>Dataset Summary</h2>
-          <ul>
-            <li>Volume: ~15GB total, over 91,000 images</li>
-            <li>Classes: 28 custom object classes including pothole, scooter, stairs, tree, fire hydrant, etc.</li>
-            <li>Sources: Public datasets, web scraping, real-world photos</li>
-          </ul>
+          <div class="content-block">
+            <h2>Object Classes</h2>
+            <div class="flex-row">
+              <div>
+                <h3>Common Classes (14)</h3>
+                <ul>
+                  <li>Person</li>
+                  <li>Bicycle</li>
+                  <li>Car</li>
+                  <li>Motorcycle</li>
+                  <li>Bus</li>
+                  <li>Truck</li>
+                  <li>Traffic Light</li>
+                  <li>Fire Hydrant</li>
+                  <li>Stop Sign</li>
+                  <li>Parking Meter</li>
+                  <li>Bench</li>
+                  <li>Bird</li>
+                  <li>Cat</li>
+                  <li>Dog</li>
+                </ul>
+              </div>
+              <div>
+                <h3>Additional Classes (13)</h3>
+                <ul>
+                  <li>Pothole</li>
+                  <li>Scooter</li>
+                  <li>Tree</li>
+                  <li>Trash Bin</li>
+                  <li>Bollard</li>
+                  <li>Stairs (up/down)</li>
+                  <li>Fence/Barrier</li>
+                  <li>Traffic Cone</li>
+                  <li>Bad Roads</li>
+                  <li>Crosswalk</li>
+                  <li>Pole</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-          <h2>Preprocessing Workflow</h2>
-          <ul>
-            <li>Labeled with Roboflow and manually verified</li>
-            <li>Data augmentation for minority classes (rotation, flipping, brightness adjustment)</li>
-            <li>Undersampling of dominant classes (e.g., person) to balance dataset</li>
-            <li>Split: 80% train, 10% validation, 10% test</li>
-          </ul>
+          <div class="content-block">
+            <h2>Challenges & Solutions</h2>
+            <div class="flex-row">
+              <div>
+                <h3>Challenges</h3>
+                <ul>
+                  <li>Mislabeling and noise in public datasets</li>
+                  <li>Minority classes like potholes hard to source</li>
+                  <li>Discrepancies between real-world and training data</li>
+                </ul>
+              </div>
+              <div>
+                <h3>Solutions</h3>
+                <ul>
+                  <li>Manual relabeling and quality control</li>
+                  <li>Data augmentation and undersampling strategies</li>
+                  <li>Custom datasets captured with GoPro / phone cameras</li>
+                </ul>
+              </div>
+            </div>
+            <div class="flex-row" style="margin-top: 2em;">
+              <div>
+                <img src="images/publicvsreal.png" alt="Public vs real-world image differences" />
+                <p class="caption">Example: real-world capture vs. public dataset image quality</p>
+              </div>
+              <div>
+                <img src="images/wrong-label.png" alt="Wrong auto-labeled image example" />
+                <p class="caption">Example of mislabeling error from auto-label tool</p>
+              </div>
+            </div>
+          </div>
 
-          <h2>Handling Class Imbalance</h2>
-          <ul>
-            <li>Used <strong>image-weights</strong> in loss function to emphasize underperforming classes</li>
-            <li>Custom learning rate scheduling to prevent overfitting on dominant classes</li>
-          </ul>
 
-          <h2>Replay-Based Learning</h2>
-          <p>To prevent <strong>catastrophic forgetting</strong> when introducing new object classes, we implemented replay-based learning. This technique retains original class accuracy while adding new categories efficiently.</p>
+          <div class="content-block">
+            <h2>Preprocessing Workflow</h2>
+            <ul>
+              <li>Data augmentation for minority classes (rotation, flipping, brightness)</li>
+              <li>Undersampling of dominant classes (e.g., person)</li>
+              <li>Manual quality checks and relabeling</li>
+              <li>Dataset split: 80% train / 10% validation / 10% test</li>
+            </ul>
+            <div style="margin-top: 1.5em; text-align: center;">
+              <img src="images/augmentation.jpg" alt="Data augmentation examples" />
+              <p class="caption">Augmentation applied to minority-class images to enhance balance</p>
+            </div>
+          </div>
 
-          <h2>Data Challenges</h2>
-          <ul>
-            <li>Mislabeling and noise in public datasets</li>
-            <li>Minority classes like potholes were hard to collect and label</li>
-            <li>Needed to maintain quality while scaling dataset size</li>
-            <li>Gap between real-life vision of an object and the training images</li>
-          </ul>
+          <div class="content-block">
+            <h2>Handling Class Imbalance</h2>
+            <ul>
+              <li>Weighted loss function with <strong>image-weights</strong></li>
+              <li>Learning rate tuning to avoid overfitting to dominant classes</li>
+              <li>Applied label smoothing and threshold tuning by class</li>
+            </ul>
+          </div>
+
+          <div class="content-block highlight-box">
+            <h3>Replay-Based Learning 🧠</h3>
+            <p>To prevent <strong>catastrophic forgetting</strong> when adding new classes, we used replay-based learning. This technique preserves prior model performance while enabling continual learning from new examples.</p>
+          </div>
+
+
         </section>
       </div>
     </div>
@@ -66,9 +187,16 @@
             <li><a href="index.html">Homepage</a></li>
             <li><a href="about.html">About / Problem</a></li>
             <li><a href="data.html">Data</a></li>
-            <li><a href="model.html">Model</a></li>
+            <li>
+              <span class="opener">Model</span>
+              <ul>
+                <li><a href="model_yolo.html">YOLOv5s (Detection)</a></li>
+                <li><a href="model_qwen2.html">Qwen2 (Description)</a></li>
+              </ul>
+            </li>
             <li><a href="architecture.html">Architecture</a></li>
             <li><a href="demo.html">Demo</a></li>
+            <li><a href="team.html">Team</a></li>
           </ul>
         </nav>
         <section>
@@ -82,6 +210,7 @@
       </div>
     </div>
   </div>
+
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/browser.min.js"></script>
   <script src="assets/js/breakpoints.min.js"></script>
