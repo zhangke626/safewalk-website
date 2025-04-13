@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Alert Rule System - SafeWalk</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-top: 1em;
+    }
+    p.caption {
+      font-style: italic;
+      text-align: center;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+  <div id="main">
+    <div class="inner">
+      <header id="header">
+        <a href="index.html" class="logo"><strong>SafeWalk</strong></a>
+      </header>
+
+      <section>
+        <header class="main">
+          <h1>Alert Rule System</h1>
+        </header>
+
+        <h2>Key Objective</h2>
+        <p>Our adaptive alert engine uses YOLO outputs to trigger spoken warnings based on real-time detection and object location. This system aims to enhance safety while minimizing alert fatigue.</p>
+        <ul>
+          <li>To <strong>reduce fatigue</strong> of users by alerting only when it matters</li>
+          <li>To <strong>enhance usability</strong> with directional guidance</li>
+          <li>To provide <strong>safer decision-making</strong> by right-time warnings based on front-end rule sets</li>
+        </ul>
+
+        <h2>Alert Rule Development</h2>
+        <p>Essentially, SafeWalk does not alert for every object detected by the model. It only provides alerts when users need to make safer decisions. To achieve this, the system checks various parameters of each object's bounding box—such as its center width, height, top, and bottom. As an object gets closer to the user, its bounding box becomes larger, indicating an increase in both height and width. Additionally, by analyzing the center position of the bounding box, the system can determine whether the user is approaching the object from the right, left, or directly in front.</p>
+        <div style="text-align: center; margin-top: 1.5em;">
+        <img src="images/alert_rules.jpg" alt="Alert rule bounding box logic">
+        <p class="caption">Bounding box logic for directional alerts</p>
+        </div>
+        <h2>Adaptive Alert</h2>
+        <p>There are two modes. The detection mode is the initial alert that users receive. In this mode, objects are detected along with directional guidance (right, left, or in front), ensuring users are aware of them ahead of time. When an object moves closer to the user, a stronger alert is triggered, stating, “Be careful {obstacle}.” Different parameter conditions are used to differentiate these two modes.</p>
+        <img src="images/adaptive_alerts.png" alt="Adaptive alerts illustration">
+        <p class="caption">Two-stage adaptive alert system</p>
+
+        <h2>Challenges & Solution</h2>
+        <p>Developing consistent alerting rules for all object classes due to drastically different shapes and sizes—such as wide cars, narrow and short bollards, and moving people—required extensive testing and adjustments. We employed a custom test mode to evaluate how bounding boxes behaved in real-world conditions and tuned our logic accordingly.</p>
+        <img src="images/alert_cal_solution.png" alt="Bounding box testing and calibration">
+        <p class="caption">Custom test mode for bounding box calibration</p>
+      </section>
+    </div>
+  </div>
+
+  <div id="sidebar">
+    <div class="inner">
+      <nav id="menu">
+        <header class="major">
+          <h2>Menu</h2>
+        </header>
+        <ul>
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="about.html">About / Problem</a></li>
+          <li><a href="objective.html">Objectives</a></li>
+          <li><a href="data.html">Data</a></li>
+          <li>
+            <span class="opener">Modeling</span>
+            <ul>
+              
+              <li><a href="model_yolo.html">Fine-Tuned YOLO v5s (Detection)</a></li>
+              <li><a href="alert.html">Alert Rule</a></li>
+              <li><a href="model_qwen2.html">Qwen2 (Description)</a></li>
+            </ul>
+          </li>
+          <li><a href="architecture.html">Architecture</a></li>
+          <li><a href="demo.html">Demo</a></li>
+          <li><a href="team.html">Team</a></li>
+        </ul>
+      </nav>
+
+      <section>
+        <header class="major">
+          <h2>Contact</h2>
+        </header>
+        <ul class="contact">
+          <li class="icon solid fa-envelope"><a href="mailto:2ez4kez@berkeley.edu">2ez4kez@berkeley.edu</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

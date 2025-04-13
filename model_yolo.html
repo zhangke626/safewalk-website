@@ -35,8 +35,9 @@
       text-align: center;
     }
     th {
-      background-color: #005c99;
-      color: white;
+      background-color: #e6f2ff; 
+      color: #003366; 
+      text-align: center;      
     }
   </style>
 </head>
@@ -53,7 +54,7 @@
           <h1>YOLOv5s: Obstacle Detection Model</h1>
         </header>
 
-        <p>We selected and fine-tuned <strong>YOLOv5s</strong> as our base for object detection due to its lightweight structure, fast inference speed, and strong performance. This model enables real-time obstacle detection on mobile devices.</p>
+        <p>We selected and fine-tuned <strong>YOLOv5s</strong> as our base for object detection due to its lightweight structure and fast inference speed</p>
 
         <div class="highlight-box">
           <h3>Model Comparison & Final Performance</h3>
@@ -62,81 +63,100 @@
               <th>Model</th>
               <th>Precision</th>
               <th>Recall</th>
-              <th>F1 Score</th>
-              <th>mAP@0.5</th>
-              <th>mAP@0.5:0.95</th>
+              <th>mAP 0.5</th>
+              <th>mAP 0.5-0.9</th>
             </tr>
             <tr>
-              <td>YOLOv5 (Base)</td>
+              <td><strong>Yolo v5s</strong></td>
               <td>0.65</td>
               <td>0.48</td>
-              <td>0.54</td>
               <td>0.52</td>
               <td>0.31</td>
             </tr>
             <tr>
-              <td>YOLOv11 (Small)</td>
+              <td><strong>Yolo v7s</strong></td>
+              <td>0.63</td>
+              <td>0.33</td>
+              <td>0.37</td>
+              <td>0.20</td>
+            </tr>
+            <tr>
+              <td><strong>Yolo v11s</strong></td>
               <td>0.66</td>
               <td>0.53</td>
               <td>0.56</td>
-              <td>0.56</td>
               <td>0.37</td>
             </tr>
-            <tr>
-              <td><strong>YOLOv5s (Fine-Tuned)</strong></td>
-              <td><strong>0.82</strong></td>
-              <td><strong>0.67</strong></td>
-              <td><strong>0.73</strong></td>
-              <td><strong>0.76</strong></td>
-              <td><strong>0.54</strong></td>
-            </tr>
           </table>
+          
           <p><strong>Deployment:</strong> Optimized using TorchScript for Android compatibility</p>
+
+          <ul style="margin-top: 1em;">
+            <li><strong>mAP 0.5</strong>: Mean Average Precision calculated using a single Intersection over Union (IoU) threshold of 0.5.</li>
+            <li><strong>mAP 0.5–0.9</strong>: Mean Average Precision averaged over multiple IoU thresholds, ranging from 0.5 to 0.95 in increments of 0.05.</li>
+          </ul>
+          
         </div>
 
         <h2>Fine-Tuning Strategy</h2>
         <ul>
           <li>Changed optimizer from <strong>SGD</strong> to <strong>Adam</strong></li>
-          <li>Lowered learning rate from <strong>0.01</strong> to <strong>0.001</strong></li>
+          <li>Lowered learning rate from <strong>0.01</strong> to <strong>0.001</strong> for better convergence</li>
           <li>Increased training epochs to <strong>100</strong></li>
-          <li>Implemented <strong>label smoothing</strong> with value <strong>0.1</strong></li>
-          <li>Used <strong>class-specific thresholds</strong> (e.g., Car: 0.35, Bollard: 0.50)</li>
+          <li>Implemented Class Weight Parameter</li>
           <li>Addressed class imbalance with <strong>undersampling</strong> and <strong>augmented oversampling</strong></li>
-          <li>Incorporated <strong>class weights</strong> for rare classes</li>
+          <li>Implemented <strong>label smoothing</strong> with value <strong>0.1</strong> to avoid over confident of the model </li>
+          <li>Applied relative threshold by class by best <strong>F1</strong> score</li>
         </ul>
 
         <div style="text-align: center; margin-top: 1.5em;">
+          <img src="images/threshold_example.png" alt="PR Curve for fine-tuned YOLOv5s" />
+          <p class="caption">Example of applying different threshold by class (Car, Bollard)</p>
+        </div>
+
+        <h2>Final Result</h2>
+        <p>After fine-tuning, the model showed improvements across all key performance metrics:</p>
+        
+        <table>
+          <tr>
+            <th>Model</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>F1 Score</th>
+            <th>mAP 0.5</th>
+            <th>mAP 0.5–0.95</th>
+          </tr>
+          <tr>
+            <td><strong>Basemodel</strong></td>
+            <td>0.65</td>
+            <td>0.48</td>
+            <td>0.54</td>
+            <td>0.52</td>
+            <td>0.31</td>
+          </tr>
+          <tr>
+            <td><strong>Fine-Tuned model</strong></td>
+            <td>0.82</td>
+            <td>0.67</td>
+            <td>0.73</td>
+            <td>0.76</td>
+            <td>0.54</td>
+          </tr>
+        </table>
+        
+        
+        <p>Frecision-Recall curve moved to the top-right corner showing the improvement after fine-tuning </p>
+        <div style="text-align: center; margin-top: 1.5em;">
           <img src="images/pr_curve.png" alt="PR Curve for fine-tuned YOLOv5s" />
-          <p class="caption">PR Curve showing improvements post fine-tuning</p>
+          <p class="caption"></p>
         </div>
 
-        <h2>Smart Alert System</h2>
-        <p>Our adaptive alert engine uses YOLO outputs to trigger spoken warnings based on real-time detection and object location. This system aims to enhance safety while minimizing alert fatigue.</p>
-        <ul>
-          <li>Alerts only trigger in critical moments</li>
-          <li>Direction-specific cues: e.g., “<em>Bicycle on your right</em>” or “<em>Obstacle in front</em>”</li>
-          <li>Bounding box parameters (center width, top, height) are used for decision-making</li>
-          <li>Class-based logic tailored for objects of varying sizes like trees, people, or bollards</li>
-        </ul>
-
-        <div style="text-align: center;">
-          <img src="images/alert_rules.jpg" alt="Alert rule bounding box logic" />
-          <p class="caption">Class-specific bounding box logic enables contextual and directional alerts</p>
-        </div>
-
-        <h2>Key Challenges & Learnings</h2>
-        <p>Developing consistent alerting rules for object classes with drastically different shapes and sizes—such as wide cars vs. narrow bollards—required extensive testing and adjustments.</p>
-        <p>We used a custom test mode to evaluate how bounding boxes behaved across real-world conditions and tuned logic accordingly.</p>
-        
-        <div style="text-align: center; margin-bottom: 2em;">
-          <img src="images/bounding_box_demo.png" alt="Bounding box testing mode example" />
-          <p class="caption">Bounding box parameters like center width and height helped us differentiate class-based behaviors</p>
+        <p>New Class Detected After fine-tuning </p>
+        <div style="text-align: left; margin-top: 1.5em;">
+          <img src="images/pr_curve_example.png" alt="PR Curve for fine-tuned YOLOv5s" />
+          <p class="caption"></p>
         </div>
         
-        <div style="text-align: center;">
-          <img src="images/test_mode.png" alt="Test mode showing bounding box parameter evaluation" />
-          <p class="caption">Test mode enabled thorough examination of alert rules under diverse conditions and distances</p>
-        </div>
         
       </section>
     </div>
@@ -151,11 +171,13 @@
         <ul>
           <li><a href="index.html">Homepage</a></li>
           <li><a href="about.html">About / Problem</a></li>
+          <li><a href="objective.html">Objectives</a></li>
           <li><a href="data.html">Data</a></li>
           <li>
-            <span class="opener">Model</span>
+            <span class="opener">Modeling</span>
             <ul>
-              <li><a href="model_yolo.html">YOLOv5s (Detection)</a></li>
+              <li><a href="model_yolo.html">Fine-Tuned YOLO v5s (Detection)</a></li>
+              <li><a href="alert.html">Alert Rule</a></li>
               <li><a href="model_qwen2.html">Qwen2 (Description)</a></li>
             </ul>
           </li>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Project Objectives - SafeWalk</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    .objective-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2em;
+      margin-top: 2em;
+    }
+    .card {
+      background-color: #f8f8f8;
+      border-left: 6px solid #005c99;
+      padding: 1.5em;
+      border-radius: 12px;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .card img {
+      max-width: 100%;
+      margin-top: 1em;
+      border-radius: 8px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+    }
+    .caption {
+      font-style: italic;
+      text-align: center;
+      margin-top: 0.5em;
+      font-size: 0.95em;
+      color: #555;
+    }
+    .card a.button-link {
+      display: inline-block;
+      margin-top: 1em;
+      padding: 0.6em 1em;
+      background-color: #005c99;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+    .card a.button-link:hover {
+      background-color: #00497a;
+    }
+  </style>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+  <div id="main">
+    <div class="inner">
+      <header id="header">
+        <a href="index.html" class="logo"><strong>SafeWalk</strong></a>
+      </header>
+
+      <section>
+        <header class="main">
+          <h1>Project Objectives</h1>
+        </header>
+
+        <div class="objective-grid">
+          <div class="card">
+            <h3>Identify Obstacles</h3>
+            <p>Identify new outdoor obstacles that could potentially be dangerous to visually impaired individuals by custom tuning the pre-trained object detection model.</p>
+            <img src="images/challenge_pic1.png" alt="Object detection challenge">
+            <p class="caption">Custom object detection for uncommon obstacles</p>
+            <a class="button-link" href="model_yolo.html">View Detection Model</a>
+          </div>
+
+          <div class="card">
+            <h3>Alert Rules</h3>
+            <p>Provide timely and informative warnings to users by developing alert rules on the front end to minimize latency.</p>
+            <img src="images/challenge_pic2.png" alt="Alert rule development">
+            <p class="caption">Latency-conscious alert logic</p>
+            <a class="button-link" href="alert.html">View Alert Rules</a>
+          </div>
+
+          <div class="card">
+            <h3>Scene Description</h3>
+            <p>To provide scenic descriptions that extend beyond pre-defined classes by utilizing a visual language model.</p>
+            <img src="images/challenge_pic3.png" alt="Scene description model">
+            <p class="caption">Beyond class-level interpretation using VLMs</p>
+            <a class="button-link" href="model_qwen2.html">View Scene Description</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="sidebar">
+    <div class="inner">
+      <nav id="menu">
+        <header class="major">
+          <h2>Menu</h2>
+        </header>
+        <ul>
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="about.html">About / Problem</a></li>
+          <li><a href="objective.html">Objectives</a></li>
+          <li><a href="data.html">Data</a></li>
+          <li>
+            <span class="opener">Modeling</span>
+            <ul>
+              
+              <li><a href="model_yolo.html">Fine-Tuned YOLO v5s (Detection)</a></li>
+              <li><a href="alert.html">Alert Rule</a></li>
+              <li><a href="model_qwen2.html">Qwen2 (Description)</a></li>
+            </ul>
+          </li>
+          <li><a href="architecture.html">Architecture</a></li>
+          <li><a href="demo.html">Demo</a></li>
+          <li><a href="team.html">Team</a></li>
+        </ul>
+      </nav>
+
+      <section>
+        <header class="major">
+          <h2>Contact</h2>
+        </header>
+        <ul class="contact">
+          <li class="icon solid fa-envelope"><a href="mailto:2ez4kez@berkeley.edu">2ez4kez@berkeley.edu</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -59,13 +59,17 @@
               <div>
                 <ul>
                   <li><strong>Volume:</strong> ~15GB total, over 90,000 labeled images</li>
-                  <li><strong>Sources:</strong> COCO dataset, real-world photos, web scraping</li>
-                  <li><strong>Labeling Tools:</strong> Roboflow + manual QA</li>
+                  <li><strong>Sources:</strong> COCO dataset, Public Images from Robowflow, Kaggle</li>
+                  <li><strong>Labeling Tools:</strong> Roboflow Annotation Tool + Manual QA</li>
                 </ul>
               </div>
               <div>
                 <img src="images/coco.png" alt="COCO dataset overview" />
-                <p class="caption">COCO dataset and public image sources</p>
+                <p class="caption">COCO dataset</p>
+              </div>
+              <div>
+                <img src="images/roboflow.png" alt="Roboflow dataset overview" />
+                <p class="caption">Roboflow dataset</p>
               </div>
             </div>
           </div>
@@ -100,12 +104,14 @@
                   <li>Tree</li>
                   <li>Trash Bin</li>
                   <li>Bollard</li>
-                  <li>Stairs (up/down)</li>
                   <li>Fence/Barrier</li>
                   <li>Traffic Cone</li>
                   <li>Bad Roads</li>
                   <li>Crosswalk</li>
                   <li>Pole</li>
+                  <li>Stairs</li>
+                  <li>Upstairs</li>
+                  <li>Upstairs</li>
                 </ul>
               </div>
             </div>
@@ -158,14 +164,6 @@
             </div>
           </div>
 
-          <div class="content-block">
-            <h2>Handling Class Imbalance</h2>
-            <ul>
-              <li>Weighted loss function with <strong>image-weights</strong></li>
-              <li>Learning rate tuning to avoid overfitting to dominant classes</li>
-              <li>Applied label smoothing and threshold tuning by class</li>
-            </ul>
-          </div>
 
           <div class="content-block highlight-box">
             <h3>Replay-Based Learning 🧠</h3>
@@ -186,11 +184,14 @@
           <ul>
             <li><a href="index.html">Homepage</a></li>
             <li><a href="about.html">About / Problem</a></li>
+            <li><a href="objective.html">Objectives</a></li>
             <li><a href="data.html">Data</a></li>
             <li>
-              <span class="opener">Model</span>
+              <span class="opener">Modeling</span>
               <ul>
-                <li><a href="model_yolo.html">YOLOv5s (Detection)</a></li>
+                
+                <li><a href="model_yolo.html">Fine-Tuned YOLO v5s (Detection)</a></li>
+                <li><a href="alert.html">Alert Rule</a></li>
                 <li><a href="model_qwen2.html">Qwen2 (Description)</a></li>
               </ul>
             </li>
